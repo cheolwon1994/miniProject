@@ -85,7 +85,7 @@
   <div style="float: left; width:200px; height:50px">
     <button id="clear" onclick="clearTimer()">초기화</button>
     <button id="start" onclick="setTimer()">시작</button>
-    <button id="stop" onclick="stop()" style="display:none">중지</button>
+    <button id="stop" onclick="stopTimer()" style="display:none">중지</button>
   </div>
 </body>
 </html>
