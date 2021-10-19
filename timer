@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+    button {
+      float: left;
+    }
+  </style>
+  <script>
+    var totTime = "";
+    var exerciseTime = "";
+    var restTime = "";
+    var time = "";
+    
+    function setTimer(){
+        clearInterval(time);
+        if(document.getElementById("exercise").value=='' || document.getElementById("rest").value==''){
+          alert("값 입력!");
+          return;
+        }
+        exerciseTime = parseInt(document.getElementById("exercise").value);
+        restTime = parseInt(document.getElementById("rest").value);
+      
+        document.getElementById("start").style.display='none';
+        document.getElementById("stop").style.display='block';
+        document.getElementsByClassName("input")[0].style.display='none';
+        document.getElementsByClassName("output")[0].style.display='block';
+      
+        document.getElementById("remainTime").innerHTML = "운동 시작!";
+        time = setInterval("startTimer()",1000);
+    }
+    
+    function startTimer() {
+      
+        if(exerciseTime>0){
+          document.getElementById("remainTime").innerHTML = "운동시간 <b>" + exerciseTime;
+          exerciseTime = exerciseTime -1;
+        }
+        else{
+           document.getElementById("remainTime").innerHTML = "휴식시간 <b>" + restTime;
+           restTime = restTime -1;
+        }
+		document.getElementById("remainTime").innerHTML
+			+= "</b>초 남았습니다.";
+		if(restTime<0) {
+			clearInterval(time);	// 시간 초기화
+			alert("시간이 완료되었습니다.");
+            stopTimer(); 
+		}
+	}
+    
+    function stopTimer(){
+        document.getElementById("stop").style.display='none';
+        document.getElementById("start").style.display='block';
+        document.getElementsByClassName("input")[0].style.display='block';
+        document.getElementsByClassName("output")[0].style.display='none';
+        exerciseTime = 0;
+        restTime = 0;
+        clearInterval(time);
+    }
+    
+    function clearTimer(){
+      document.getElementById("exercise").value='';
+      document.getElementById("rest").value='';
+      document.getElementById("loopTime").value='1';
+    }
+    
+  </script>
+</head>
+<body>
+  <div class="input">
+    <div>
+      운동 시간: <input type="number" id="exercise">
+    </div>
+    <div>
+      휴식 시간: <input type="number" id="rest">
+    </div>
+  </div>
+  <div class="output" style="display:none;">
+    <span id="remainTime" value=""/>
+  </div>
+  <div style="float: left; width:200px; height:50px">
+    <button id="clear" onclick="clearTimer()">초기화</button>
+    <button id="start" onclick="setTimer()">시작</button>
+    <button id="stop" onclick="stop()" style="display:none">중지</button>
+  </div>
+</body>
+</html>
